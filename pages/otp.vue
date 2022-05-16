@@ -8,19 +8,21 @@
 
     <br />
     <br />
-    <div>Otpmu nii buat dikirim: {{ stateOTP }}</div>
-    <div>sayangnya belum ada input otpnya ini cuman ngetest doang</div>
-    <div>kalau pengen coba bisa ke sini ni <a href="/otp">Klik Disini</a></div>
+
+    <v-otp-input length="5" v-model="stateOTP" @finish="onFinish"></v-otp-input>
+    <br />
+    <h1>{{ sukses }}</h1>
     <div>v.{{ version }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "IndexPage",
+  name: "OTP",
   data() {
     return {
       stateOTP: "",
+      sukses: "",
       version: "1.0.1",
     };
   },
@@ -28,6 +30,9 @@ export default {
     this.otpFak();
   },
   methods: {
+    onFinish(rsp) {
+      if (this.stateOTP == "12345") return (this.sukses = "Gweeerrrr isoh cah");
+    },
     async otpFak() {
       if ("OTPCredential" in window) {
         const ac = new AbortController();
