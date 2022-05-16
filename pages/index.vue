@@ -4,7 +4,6 @@
       Jaga rahasia diantara kita jangan sampai disebar kemana mana ini otp buat
       kamu ya: 12345
     </div>
-    {{ heh }}
     <div>@webgua.com #12345</div>
     <br />
     <div>Otpmu nii buat dikirim: {{ stateOTP }}</div>
@@ -19,27 +18,34 @@ export default {
   data() {
     return {
       stateOTP: "",
-      version: "1.0.0",
+      version: "1.0.1",
     };
   },
   mounted() {
-    if ("OTPCredential" in window) {
-      const ac = new AbortController();
+    this.otpFak();
+  },
+  methods: {
+    async otpFak() {
+      if ("OTPCredential" in window) {
+        const ac = new AbortController();
 
-      navigator.credentials
-        .get({
-          otp: { transport: ["sms"] },
-          signal: ac.signal,
-        })
-        .then((otp) => {
-          this.stateOTP = otp.code;
-          ac.abort();
-        })
-        .catch((err) => {
-          ac.abort();
-          console.log(err);
-        });
-    }
+        const res = await navigator.credentials
+          .get({
+            otp: { transport: ["sms"] },
+            signal: ac.signal,
+          })
+          .then((otp) => {
+            this.stateOTP = otp.code;
+            ac.abort();
+            return otp.code;
+          })
+          .catch((err) => {
+            ac.abort();
+            console.log(err);
+          });
+        alert(res);
+      }
+    },
   },
 };
 </script>
