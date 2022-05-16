@@ -11,7 +11,7 @@
 
     <v-otp-input length="5" v-model="stateOTP" @finish="onFinish"></v-otp-input>
     <br />
-    <h1>{{ sukses }}</h1>
+    <h1 v-if="stateOTP.length >= 5">{{ sukses }}</h1>
     <div>v.{{ version }}</div>
   </div>
 </template>
