@@ -39,16 +39,9 @@ export default {
         "https://deelay.me/5000/https://thumbs.dreamstime.com/b/fond-de-coeur-d-amour-d-arc-en-ciel-60045149.jpg";
     };
     this.otpFak();
-    axios
-      .get("/api/meta-scraper", {
-        params: {
-          target:
-            "https://www.cimbniaga.co.id/content/dam/cimb/kpr/KPR%20XTRA%20MANFAAT.pdf",
-        },
-      })
-      .then((res) => console.log(res));
-
-    // "https://www.cimbniaga.co.id/content/dam/cimb/kpr/KPR%20XTRA%20MANFAAT.pdf"
+    axios.get(
+      "http://127.0.0.1:8080/https://www.cimbniaga.co.id/content/dam/cimb/kpr/KPR%20XTRA%20MANFAAT.pdf"
+    );
   },
   methods: {
     async otpFak() {
