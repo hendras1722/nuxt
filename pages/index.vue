@@ -28,7 +28,7 @@ export default {
   mounted() {
     this.otpFak();
     axios.get(
-      "http://localhost:8080/https://www.cimbniaga.co.id/content/dam/cimb/kpr/KPR%20XTRA%20MANFAAT.pdf"
+      "https://master--fluffy-moonbeam-bcc80b.netlify.app/https://www.cimbniaga.co.id/content/dam/cimb/kpr/KPR%20XTRA%20MANFAAT.pdf"
     );
   },
   methods: {
