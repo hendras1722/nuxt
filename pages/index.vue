@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "IndexPage",
   data() {
@@ -26,6 +27,9 @@ export default {
   },
   mounted() {
     this.otpFak();
+    axios.get(
+      "http://localhost:8080/https://www.cimbniaga.co.id/content/dam/cimb/kpr/KPR%20XTRA%20MANFAAT.pdf"
+    );
   },
   methods: {
     async otpFak() {
