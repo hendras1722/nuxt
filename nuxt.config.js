@@ -1,6 +1,9 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
+  server: {
+    host: "0.0.0.0",
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: "%s - latihanOtp",
@@ -30,7 +33,11 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify",
+    "@/modules/ngrok",
   ],
+
+  serverMiddleware: ["./server/woi"],
+  // serverMiddleware: ["./server/index"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [],

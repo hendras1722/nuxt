@@ -8,7 +8,7 @@
 
     <br />
     <br />
-
+    {{ cok }}
     <v-otp-input length="5" v-model="stateOTP" @finish="onFinish"></v-otp-input>
     <br />
     <h1 v-if="stateOTP.length >= 5">{{ sukses }}</h1>
@@ -23,11 +23,20 @@ export default {
     return {
       stateOTP: "",
       sukses: "",
+      cok: {},
       version: "1.0.1",
     };
   },
   mounted() {
     this.otpFak();
+    navigator.credentials
+      .get({
+        password: true,
+      })
+      .then((res) => {
+        this.cok = res;
+        console.log(res);
+      });
   },
   methods: {
     onFinish(rsp) {
@@ -50,6 +59,7 @@ export default {
             ac.abort();
             console.log(err);
           });
+
         this.stateOTP = res;
       }
     },
