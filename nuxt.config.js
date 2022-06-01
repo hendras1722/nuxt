@@ -20,7 +20,13 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
   serverMiddleware: ["../server/server.js"],
-
+  proxy: {
+    // Proxy to backend unix socket
+    "/api3": {
+      changeOrigin: false,
+      target: { socketPath: "../server/server.js" },
+    },
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
