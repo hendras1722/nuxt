@@ -1,9 +1,10 @@
 import colors from "vuetify/es5/util/colors";
 
 export default {
-  server: {
-    host: "0.0.0.0",
-  },
+  // server: {
+  //   host: "0.0.0.0",
+  //   port: "4000",
+  // },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: "%s - latihanOtp",
@@ -22,14 +23,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
-  serverMiddleware: ["../server/server.js"],
-  proxy: {
-    // Proxy to backend unix socket
-    "/api3": {
-      changeOrigin: false,
-      target: { socketPath: "../server/server.js" },
-    },
-  },
+  // serverMiddleware: ["../server/server.js", "./server/woi"],
+  // proxy: {
+  //   // Proxy to backend unix socket
+  //   "/api3": {
+  //     changeOrigin: false,
+  //     target: { socketPath: "../server/server.js" },
+  //   },
+  // },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
@@ -43,7 +44,7 @@ export default {
     "@/modules/ngrok",
   ],
 
-  serverMiddleware: ["./server/woi"],
+  // serverMiddleware: [],
   // serverMiddleware: ["./server/index"],
 
   // Modules: https://go.nuxtjs.dev/config-modules

@@ -48,8 +48,8 @@ cors_proxy
       xfwd: false,
     },
   })
-  .listen(port, function () {
-    console.log("Running CORS Anywhere on " + ":" + port);
+  .listen(host, port, function () {
+    console.log("Running CORS Anywhere on " + ":" + host + port);
   });
 
 module.exports = { path: "/api", handler: cors_proxy };
