@@ -1,68 +1,98 @@
 <template>
   <div>
-    <div>
-      Jaga rahasia diantara kita jangan sampai disebar kemana mana ini otp buat
-      kamu ya: 12345
+    <h2>Input type default = "tel"</h2>
+    <div style="display: flex; flex-direction: row">
+      <v-otp-input
+        ref="otpInput0"
+        input-classes="otp-input"
+        separator="-"
+        id="otpInput"
+        :num-inputs="4"
+        :should-auto-focus="true"
+        @on-change="handleOnChange"
+        @on-complete="handleOnComplete"
+      />
+      <button @click="handleClearInput('otpInput0')">Clear Input</button>
     </div>
-    <div>@master--fluffy-moonbeam-bcc80b.netlify.app #12345</div>
 
-    <br />
-    <br />
-    {{ cok }}
-    <v-otp-input length="5" v-model="stateOTP" @finish="onFinish"></v-otp-input>
-    <br />
-    <h1 v-if="stateOTP.length >= 5">{{ sukses }}</h1>
-    <div>v.{{ version }}</div>
+    <h2>Input type = "number"</h2>
+    <div style="display: flex; flex-direction: row">
+      <v-otp-input
+        ref="otpInput1"
+        input-classes="otp-input"
+        separator=""
+        id="otpInput1"
+        :num-inputs="9"
+        :should-auto-focus="true"
+        input-type="number"
+        @on-change="handleOnChange"
+        @on-complete="handleOnComplete"
+        @blur="handleBlur('otpInput1')"
+      />
+      <button @click="handleClearInput('otpInput1')">Clear Input</button>
+    </div>
+
+    <h2>Input type = "password"</h2>
+    <div style="display: flex; flex-direction: row">
+      <v-otp-input
+        ref="otpInput2"
+        input-classes="otp-input"
+        separator="-"
+        id="otpInput2"
+        :num-inputs="4"
+        :should-auto-focus="true"
+        input-type="password"
+        @on-change="handleOnChange"
+        @on-complete="handleOnComplete"
+      />
+      <button @click="handleClearInput('otpInput2')">Clear Input</button>
+    </div>
   </div>
 </template>
 
 <script>
+import OtpInput from '@/components/otpInput.vue'
+
 export default {
-  name: "OTP",
-  data() {
-    return {
-      stateOTP: "",
-      sukses: "",
-      cok: {},
-      version: "1.0.1",
-    };
-  },
-  mounted() {
-    this.otpFak();
-    navigator.credentials
-      .get({
-        password: true,
-      })
-      .then((res) => {
-        this.cok = res;
-        console.log(res);
-      });
+  name: 'App',
+  components: {
+    'v-otp-input': OtpInput,
   },
   methods: {
-    onFinish(rsp) {
-      if (this.stateOTP == "12345") return (this.sukses = "Gweeerrrr isoh cah");
+    handleBlur(ref) {
+      const body = document.getElementById(ref)
+      body.blur()
     },
-    async otpFak() {
-      if ("OTPCredential" in window) {
-        const ac = new AbortController();
-
-        const res = await navigator.credentials
-          .get({
-            otp: { transport: ["sms"] },
-            signal: ac.signal,
-          })
-          .then((otp) => {
-            ac.abort();
-            return otp.code;
-          })
-          .catch((err) => {
-            ac.abort();
-            console.log(err);
-          });
-
-        this.stateOTP = res;
-      }
+    handleOnComplete(value) {
+      console.log('OTP completed: ', value)
+    },
+    handleOnChange(value) {
+      console.log('OTP changed: ', value)
+    },
+    handleClearInput(ref) {
+      this.$refs[ref].clearInput()
     },
   },
-};
+}
 </script>
+
+<style lang="scss">
+.otp-input {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  margin: 0 10px;
+  font-size: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  text-align: center;
+  &.error {
+    border: 1px solid red !important;
+  }
+}
+.otp-input::-webkit-inner-spin-button,
+.otp-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+</style>

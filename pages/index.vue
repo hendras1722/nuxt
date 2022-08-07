@@ -1,155 +1,130 @@
 <template>
   <div>
-    <div>
-      Jaga rahasia diantara kita jangan sampai disebar kemana mana ini otp buat
-      kamu ya: 12345
+    <div class="home">
+      <div class="image_bg"></div>
+      <div class="home__wording">Welcome to MSA LuL</div>
     </div>
-    <div>@master--fluffy-moonbeam-bcc80b.netlify.app #12345</div>
-
-    <br />
-    <br />
-    <div>Otpmu nii buat dikirim: {{ stateOTP }}</div>
-    <div>sayangnya belum ada input otpnya ini cuman ngetest doang</div>
-    <div>kalau pengen coba bisa ke sini ni <a href="/otp">Klik Disini</a></div>
-    <div>v.{{ version }}</div>
-
-    <!-- "mousemove", onZoom);
-      container.addEventListener("mouseover", onZoom);
-      container.addEventListener("mouseleave", offZoom); -->
-    <div style="width: 100vw" class="d-flex justify-center">
-      <div
-        id="container"
-        @mousemove="onZoom"
-        @mouseover="onZoom"
-        @mouseleave="offZoom"
-      >
-        <img
-          src="https://thumbs.dreamstime.com/b/fond-de-coeur-d-amour-d-arc-en-ciel-60045149.jpg"
-          alt="Image Alt"
-        />
-      </div>
+    <div class="text-center mt-5">
+      <h1 style="font-weight: 700">Catatan Untuk MSA</h1>
     </div>
-
-    <!-- <div id="container" class="image">
-      <img class="loading_img" />
-    </div> -->
-    <Tutorial ref="tutorial" />
+    <div class="section px-5 py-5">
+      <v-card class="card" width="400">
+        <v-card-text>Table Questionnaire</v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn text color="teal accent-4" @click="handleUrl('questionnaire')">
+            Learn More
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card class="card" width="400">
+        <v-card-text>OTP Sms</v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn text color="teal accent-4" @click="handleUrl('otp')">
+            Learn More
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card class="card" width="400">
+        <v-card-text>Image Lazy Load</v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn
+            text
+            color="teal accent-4"
+            @click="handleUrl('lazyloadingimages')"
+          >
+            Learn More
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card class="card" width="400">
+        <v-card-text>Drag n Drop (For Desktop)</v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn text color="teal accent-4" @click="handleUrl('drag')">
+            Learn More
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card class="card" width="400">
+        <v-card-text>HTML Symbols</v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn text color="teal accent-4" @click="handleUrl('htmlSymbol')">
+            Learn More
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-card class="card" width="400">
+        <v-card-text>Table Questionnaire</v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn text color="teal accent-4" @click="handleUrl('questionnaire')">
+            Learn More
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import Tutorial from "../components/Tutorial.vue";
 export default {
-  name: "IndexPage",
-  components: {
-    Tutorial,
-  },
-  data() {
-    return {
-      stateOTP: "",
-      version: "1.0.1",
-    };
-  },
-  mounted() {
-    // var image = document.getElementsByClassName("loading_img")[0];
-    // const containter = document.getElementsByClassName("image")[0];
-    // containter.style.width = "300px";
-    // image.src = "loading-cat.gif";
-    // image.onload = function () {
-    //   this.onload = function () {
-    //     // Whatever you want to do now.
-    //   };
-    //   image.src =
-    //     "https://deelay.me/5000/https://thumbs.dreamstime.com/b/fond-de-coeur-d-amour-d-arc-en-ciel-60045149.jpg";
-    // };
-    // this.otpFak();
-    // axios.get(
-    //   "http://127.0.0.1:8080/https://www.cimbniaga.co.id/content/dam/cimb/kpr/KPR%20XTRA%20MANFAAT.pdf"
-    // );
-  },
   methods: {
-    imageZoom() {
-      const tutorial = this.$refs.tutorial;
-      console.log(tutorial, this.$nuxt, "initutorial");
+    handleUrl(e) {
+      switch (e) {
+        case 'questionnaire':
+          location.href = '/tableQuestionnaire'
+          break
+        case 'otp':
+          location.href = '/otp'
+          break
+        case 'lazyloadingimages':
+          location.href = '/lazyloadingimages'
+          break
+        case 'drag':
+          location.href = '/drag'
+          break
+        case 'htmlSymbol':
+          location.href = '/htmlSymbol'
 
-      const container = document.getElementById("container");
-      const img = document.querySelector("img");
-      container.addEventListener("mousemove", onZoom);
-      container.addEventListener("mouseover", onZoom);
-      container.addEventListener("mouseleave", offZoom);
-      function onZoom(e) {
-        const x = e.clientX - e.target.offsetLeft;
-        const y = e.clientY - e.target.offsetTop;
-        img.style.transformOrigin = `${x}px ${y}px`;
-        img.style.transform = "scale(2.5)";
-      }
-      function offZoom(e) {
-        img.style.transformOrigin = `center center`;
-        img.style.transform = "scale(1)";
-      }
-    },
-    onZoom(e) {
-      const img = document.querySelector("img");
-      const x = e.clientX - e.target.offsetLeft;
-      const y = e.clientY - e.target.offsetTop;
-      img.style.transformOrigin = `${x}px ${y}px`;
-      img.style.transform = "scale(2.5)";
-    },
-    offZoom(e) {
-      const img = document.querySelector("img");
-      img.style.transformOrigin = `center center`;
-      img.style.transform = "scale(1)";
-    },
-    async otpFak() {
-      if ("OTPCredential" in window) {
-        const ac = new AbortController();
-
-        const res = await navigator.credentials
-          .get({
-            otp: { transport: ["sms"] },
-            signal: ac.signal,
-          })
-          .then((otp) => {
-            ac.abort();
-            return otp.code;
-          })
-          .catch((err) => {
-            ac.abort();
-            console.log(err);
-          });
-        this.stateOTP = res;
+          break
+        default:
+          break
       }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-.loading_img {
-  // width: 600px;
-  // height: 450px;
-  // background-image: url("../static/loading.gif");
+.image_bg {
+  background: url('@/assets/image/msa.jpeg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: black;
   background-position: center;
+  height: 100vh;
 }
-// .image img {
-//   width: 100%;
-// }
-// .image {
-//   display: inline-block;
-//   height: 100%;
-// }
-
-#container {
-  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.3);
-  height: 300px;
-  width: 300px;
-  overflow: hidden;
+.home {
+  position: relative;
+  &__wording {
+    position: absolute;
+    z-index: 1;
+    color: white;
+    margin-top: -100px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    font-size: 30px;
+    font-weight: 700;
+  }
 }
-img {
-  transform-origin: center center;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+.section {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.section .card {
+  margin: 8px;
 }
 </style>
